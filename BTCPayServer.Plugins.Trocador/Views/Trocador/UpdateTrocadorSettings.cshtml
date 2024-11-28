@@ -51,8 +51,8 @@ ViewData.SetActivePage("Trocador", "Trocador", "Trocador");
           <option value="Auto" asp-for="DefaultPaymentMethodId">Auto</option>
           @foreach (var paymentMethod in Model.PaymentMethods)
           {
-          var paymentMethodId = paymentMethod.Value.ToString();
-          var paymentMethodLabel = paymentMethod.Key.ToString();
+          var paymentMethodId = paymentMethod.Config.ToString();
+          var paymentMethodLabel = paymentMethod.PaymentMethodId.ToString();
 
           <option value="@paymentMethodId" asp-for="DefaultPaymentMethodId">@paymentMethodLabel</option>
           }

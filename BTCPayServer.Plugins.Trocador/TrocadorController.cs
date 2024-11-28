@@ -56,7 +56,7 @@ namespace BTCPayServer.Plugins.Trocador
                 {
                     object data = paymentMethod.Config;
 
-                    string cryptoCode = paymentMethod.PaymentMethodId;
+                    string cryptoCode = paymentMethod.PaymentMethodId.ToString();
                     var network = _btcPayNetworkProvider.GetNetwork(cryptoCode);
                     string label = network != null ? network.DisplayName : cryptoCode;
 
