@@ -19,30 +19,31 @@ namespace BTCPayServer.Plugins.Trocador
             services.AddSingleton<TrocadorService>();
 
             // Sidebar Nav
-            services.AddSingleton<IUIExtension>(new UIExtension("Trocador/TrocadorNav", "store-integrations-nav"));
+            services.AddUIExtension("store-integrations-nav", "Trocador/TrocadorNav");
             // Store Settings Plugins Integration
-            services.AddSingleton<IUIExtension>(new UIExtension("Trocador/StoreIntegrationTrocadorOption", "store-integrations-list"));
+            services.AddUIExtension("store-integrations-list", "Trocador/StoreIntegrationTrocadorOption");
 
             // -- Checkout v2 --
 
             // Tab (Payment Method)
-            services.AddSingleton<IUIExtension>(new UIExtension("Trocador/CheckoutV2/CheckoutPaymentMethodExtension", "checkout-payment-method"));
+            services.AddUIExtension("checkout-payment-method", "Trocador/CheckoutV2/CheckoutPaymentMethodExtension");
             // Widget
-            services.AddSingleton<IUIExtension>(new UIExtension("Trocador/CheckoutV2/CheckoutPaymentExtension", "checkout-payment"));
+            services.AddUIExtension("checkout-payment", "Trocador/CheckoutV2/CheckoutPaymentExtension");
 
             // -- Checkout Classic --
 
             // Tab
-            services.AddSingleton<IUIExtension>(new UIExtension("Trocador/CheckoutClassic/CheckoutTabExtension", "checkout-bitcoin-post-tabs"));
-            services.AddSingleton<IUIExtension>(new UIExtension("Trocador/CheckoutClassic/CheckoutTabExtension", "checkout-lightning-post-tabs"));
+            services.AddUIExtension("checkout-bitcoin-post-tabs", "Trocador/CheckoutClassic/CheckoutTabExtension");    
+            services.AddUIExtension("checkout-lightning-post-tabs", "Trocador/CheckoutClassic/CheckoutTabExtension");    
+            
             // Widget
-            services.AddSingleton<IUIExtension>(new UIExtension("Trocador/CheckoutClassic/CheckoutContentExtension", "checkout-bitcoin-post-content"));
-            services.AddSingleton<IUIExtension>(new UIExtension("Trocador/CheckoutClassic/CheckoutContentExtension", "checkout-lightning-post-content"));
+            services.AddUIExtension("checkout-bitcoin-post-content", "Trocador/CheckoutClassic/CheckoutContentExtension");
+            services.AddUIExtension("checkout-lightning-post-content", "Trocador/CheckoutClassic/CheckoutContentExtension");
 
-            services.AddSingleton<IUIExtension>(new UIExtension("Trocador/CheckoutEnd", "checkout-end"));
+            services.AddUIExtension("checkout-end", "Trocador/CheckoutEnd");
 
             // -- Checkout No-Script --
-            services.AddSingleton<IUIExtension>(new UIExtension("Trocador/CheckoutNoScript/CheckoutPaymentExtension", "checkout-noscript-end"));
+            services.AddUIExtension("checkout-noscript-end", "Trocador/CheckoutNoScript/CheckoutPaymentExtension");
 
             base.Execute(services);
         }
