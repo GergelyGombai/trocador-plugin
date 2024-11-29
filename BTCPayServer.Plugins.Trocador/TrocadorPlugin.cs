@@ -30,17 +30,6 @@ namespace BTCPayServer.Plugins.Trocador
             // Widget
             services.AddUIExtension("checkout-payment", "Trocador/CheckoutV2/CheckoutPaymentExtension");
 
-            // -- Checkout Classic --
-
-            // Tab
-            services.AddUIExtension("checkout-bitcoin-post-tabs", "Trocador/CheckoutClassic/CheckoutTabExtension");    
-            services.AddUIExtension("checkout-lightning-post-tabs", "Trocador/CheckoutClassic/CheckoutTabExtension");    
-            
-            // Widget
-            services.AddUIExtension("checkout-bitcoin-post-content", "Trocador/CheckoutClassic/CheckoutContentExtension");
-            services.AddUIExtension("checkout-lightning-post-content", "Trocador/CheckoutClassic/CheckoutContentExtension");
-
-            services.AddUIExtension("checkout-end", "Trocador/CheckoutEnd");
 
             // -- Checkout No-Script --
             services.AddUIExtension("checkout-noscript-end", "Trocador/CheckoutNoScript/CheckoutPaymentExtension");
