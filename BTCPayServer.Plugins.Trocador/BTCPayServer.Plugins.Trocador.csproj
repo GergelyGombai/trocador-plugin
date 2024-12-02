@@ -11,7 +11,7 @@
       <Product>Trocador</Product>
       <Description>Embed a trocador.app conversion widget on the payment checkout to allow customers to pay with altcoins in a private manner.</Description>
       <Authors>rafael_xmr, ComradeBlin</Authors>
-      <Version>2.0.0</Version>
+      <Version>2.0.1</Version>
   </PropertyGroup>
 
   <!-- Plugin development properties -->
