@@ -40,7 +40,7 @@ namespace BTCPayServer.Plugins.Trocador
         {
             var k = $"{nameof(TrocadorSettings)}_{storeId}";
             await _storeRepository.UpdateSetting(storeId, nameof(TrocadorSettings), trocadorSettings);
-            _memoryCache.Remove(k);
+            _memoryCache.Set(k, trocadorSettings);
         }
     }
 }
