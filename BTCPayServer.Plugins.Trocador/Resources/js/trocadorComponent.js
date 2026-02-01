@@ -40,13 +40,14 @@ function getUrl(that) {
     tickerTo = "btc";
     networkTo = "Lightning";
   } else {
-    if (toCurrency.toUpperCase().includes("-TRON") || toCurrency.toUpperCase().includes("_TRON")) {
+    if (toCurrency.toUpperCase().includes("USDT") {
       networkTo = "TRC20";
     }
     tickerTo = tickerTo
       .replace("_BTCLike", "")
       .replace("_MoneroLike", "")
       .replace("_ZcashLike", "")
+      .replace("_TRONUSDTLike, "")
       .replace(/-.*/g, "")
       .toLowerCase();
   }
