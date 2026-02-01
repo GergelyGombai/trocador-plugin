@@ -39,15 +39,14 @@ function getUrl(that) {
   if (tickerTo.includes("Lightning") || tickerTo.includes("LNURL")) {
     tickerTo = "btc";
     networkTo = "Lightning";
+  } else if toCurrency.toUpperCase().includes("USDT") {
+    tickerTo = "usdt";
+    networkTo = "TRC20";
   } else {
-    if (toCurrency.toUpperCase().includes("USDT") {
-      networkTo = "TRC20";
-    }
     tickerTo = tickerTo
       .replace("_BTCLike", "")
       .replace("_MoneroLike", "")
       .replace("_ZcashLike", "")
-      .replace("_TRONUSDTLike, "")
       .replace(/-.*/g, "")
       .toLowerCase();
   }
