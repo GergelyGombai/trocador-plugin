@@ -67,17 +67,6 @@ function getUrl(that) {
     brandColor ? brandColor.replace("#", "") : btcPayGreen
   }`;
 
-  const isDark =
-    document.documentElement.getAttribute("data-theme") === "dark" ||
-    document.documentElement.getAttribute("data-btcpay-theme") === "dark" ||
-    (!document.documentElement.getAttribute("data-theme") &&
-      !document.documentElement.getAttribute("data-btcpay-theme") &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-  const themeColors = isDark
-    ? "&bgcolor=1e1e1eff&textcolor=f5f5f5"
-    : "";
-
   let fiatCurrency;
 
   if (fiatDenominated) {
@@ -132,7 +121,6 @@ function getUrl(that) {
     fromPreset +
     (customerEmail ? `&email=${customerEmail}` : "") +
     buttonBgColor +
-    themeColors +
     (fiatCurrency ? `&fiat_equiv=${fiatCurrency}` : "") +
     (donation ? "&donation=True" : "") +
     (referralCode ? `&ref=${referralCode}` : "") +
