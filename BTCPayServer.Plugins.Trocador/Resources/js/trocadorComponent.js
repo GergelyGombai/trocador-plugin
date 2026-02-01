@@ -39,6 +39,9 @@ function getUrl(that) {
   if (tickerTo.includes("Lightning") || tickerTo.includes("LNURL")) {
     tickerTo = "btc";
     networkTo = "Lightning";
+  } else if (tickerTo.toUpperCase().includes("USDT")) {
+    tickerTo = "usdt";
+    networkTo = "TRC20";
   } else {
     tickerTo = tickerTo
       .replace("_BTCLike", "")

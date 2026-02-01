@@ -35,6 +35,10 @@
     }
     else
     {
+        if (tickerTo.Contains("-TRON", StringComparison.OrdinalIgnoreCase))
+        {
+            networkTo = "TRC20";
+        }
         tickerTo = Regex.Replace(tickerTo
         .Replace("_BTCLike", "")
         .Replace("_MoneroLike", "")
