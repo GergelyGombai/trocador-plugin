@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BTCPayServer.Abstractions.Constants;
 using BTCPayServer.Client;
+using BTCPayServer.Data;
+using BTCPayServer.Services.Invoices;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
@@ -15,25 +19,24 @@ namespace BTCPayServer.Plugins.Trocador
     public class TrocadorController : Controller
     {
         private readonly BTCPayNetworkProvider _btcPayNetworkProvider;
-
-        private readonly BTCPayServerClient _btcPayServerClient;
+        private readonly PaymentMethodHandlerDictionary _handlers;
         private readonly TrocadorService _TrocadorService;
 
         public TrocadorController(BTCPayNetworkProvider btcPayNetworkProvider,
-            BTCPayServerClient btcPayServerClient, TrocadorService TrocadorService)
+            PaymentMethodHandlerDictionary handlers, TrocadorService TrocadorService)
         {
             _btcPayNetworkProvider = btcPayNetworkProvider;
-            _btcPayServerClient = btcPayServerClient;
+            _handlers = handlers;
             _TrocadorService = TrocadorService;
         }
 
         [HttpGet("")]
         public async Task<IActionResult> UpdateTrocadorSettings(string storeId)
         {
-            var store = await _btcPayServerClient.GetStore(storeId);
+            var store = HttpContext.GetStoreData();
 
             UpdateTrocadorSettingsViewModel vm = new UpdateTrocadorSettingsViewModel();
-            vm.StoreName = store.Name;
+            vm.StoreName = store.StoreName;
             TrocadorSettings Trocador = null;
             try
             {
@@ -50,13 +53,11 @@ namespace BTCPayServer.Plugins.Trocador
             {
                 Dictionary<string, string> newPaymentMethods = new Dictionary<string, string>();
 
-                var paymentMethods = (await _btcPayServerClient.GetStorePaymentMethods(storeId));
+                var paymentMethodConfigs = store.GetPaymentMethodConfigs(_handlers);
 
-                foreach (var paymentMethod in paymentMethods)
+                foreach (var (paymentMethodId, _) in paymentMethodConfigs)
                 {
-                    object data = paymentMethod.Config;
-
-                    string cryptoCode = paymentMethod.PaymentMethodId.ToString();
+                    string cryptoCode = paymentMethodId.ToString();
                     var network = _btcPayNetworkProvider.GetNetwork(cryptoCode);
                     string label = network != null ? network.DisplayName : cryptoCode;
 
@@ -65,9 +66,7 @@ namespace BTCPayServer.Plugins.Trocador
                         label = "Lightning";
                     }
 
-
                     newPaymentMethods[label] = cryptoCode;
-
                 }
 
                 vm.PaymentMethods = newPaymentMethods;
